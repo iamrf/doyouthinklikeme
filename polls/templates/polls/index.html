@@ -1,0 +1,12 @@
+{% for question in questions %}
+<div style="border: 1px solid #ff0000; padding: 20px; border-radius: 15px; margin: 10px;">
+<h1>{{ question.title }}</h1>
+<p>{{ question.text }}</p>
+
+<h3>{{ question.choice.text }}</h3>
+<p>
+{{ question.choice.p_text }} | {{ question.choice.n_text }}
+</p>
+<p>{{ question.choice.p_votes }} - {{ question.choice.n_votes }}</p>
+</div>
+{% endfor %}
