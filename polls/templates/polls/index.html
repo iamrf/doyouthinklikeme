@@ -1,12 +1,44 @@
-{% for question in questions %}
-<div style="border: 1px solid #ff0000; padding: 20px; border-radius: 15px; margin: 10px;">
-<h1>{{ question.title }}</h1>
-<p>{{ question.text }}</p>
+{% extends 'polls/base.html' %}
 
-<h3>{{ question.choice.text }}</h3>
-<p>
-{{ question.choice.p_text }} | {{ question.choice.n_text }}
-</p>
-<p>{{ question.choice.p_votes }} - {{ question.choice.n_votes }}</p>
-</div>
+{% block title %}
+Do you think like me? - Home
+{% endblock %}
+
+{% block content %}
+{% for question in questions %}
+<a href="{% url 'polls:q_page' question.id %}" class="section-link">
+<section class="section-post">
+    <header>
+        <h3>
+            {{ question.title }}
+        </h3><br>
+    </header>
+    <div class="clearfix"></div>
+
+    <article>
+        <div class="progress">
+            <div class="progress-bar bg-success" style="width:{{ question.choice.p_percent }}%;height:2rem;">
+                <span class="progress-text ltr">
+                    {{ question.choice.p_percent|floatformat:1 }} %
+                </span>
+            </div>
+            <div class="progress-bar bg-danger" style="width:{{ question.choice.n_percent }}%;height:2rem;">
+                <span class="progress-text ltr">
+                        {{ question.choice.n_percent|floatformat:1 }} %
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <p>
+            {{ question.text|linebreaks|truncatewords:50 }}
+        </p>
+    </article>
+    <div class="clearfix"></div>
+
+    <footer style="text-align: center"> 
+        <a href="{% url 'polls:q_page' question.id %}#vote-box" class="btn btn-block btn-outline-dark"><i class="fa fa-ticket"></i> رای دهید</a>
+    </footer>
+</section>
+</a>
 {% endfor %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+{{ question.title }}
+{% endblock %}
+
+{% block content %}
+<section class="section-single-page">
+    <header>
+        <h3>
+            {{ question.title }}
+        </h3><br>
+    </header>
+    <div class="clearfix"></div>
+    <article>
+
+        {% include 'polls/progress_full.html' %}
+
+        <div class="clearfix"></div>
+
+        {% include 'polls/tab-pane.html' %}
+
+        <div class="clearfix"></div><br>
+
+        {% include 'polls/time-info.html' %}
+
+        <div class="clearfix"></div><br>
+
+        {% include 'polls/vote_box.html' %}
+
+        <div class="clearfix"></div>
+    </article>
+    <div class="clearfix"></div>
+    <footer>
+        
+    </footer>
+</section>
+
+<a href="{% url 'polls:index' %}" class="btn btn-warning">Home</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+<div class="container" id="vote-box">
+    <div class="vote-box">
+        <h4><i class="fa fa-ticket"></i> صندوق رای </h4>
+        <div class="row">
+            <div class="col-md-12 vote-box-item">
+                {% if error %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>خطا !</strong> &nbsp; {{ error }}
+                </div>
+                {% endif %}
+                <form action="{% url 'polls:vote' question.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="radio" id="positive" name="vote" value="plus" checked>
+                    <label for="positive" class="bg-success pad hand">{{ question.choice.p_text }}</label><br>
+                    <input type="radio" id="negative" name="vote" value="minus">
+                    <label for="negative" class="bg-danger pad hand">{{ question.choice.n_text }}</label><br>
+                    <button type="submit" class="btn btn-block btn-dark hand">   ثبت </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

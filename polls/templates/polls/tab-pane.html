@@ -1,0 +1,59 @@
+<div class="container"><br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#tab-page-1">
+            توضیحات
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab-page-2">
+            آمار
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab-page-3">
+            گفت و گو
+        </a>
+        </li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div id="tab-page-1" class="container tab-pane active"><br>
+            <h4>
+                <i class="fa fa-list-alt"></i> &nbsp;    توضیحات بیشتر
+            </h4>
+            <p>
+                {% if question.text %}
+                    {{ question.text|linebreaks }}
+                {% else %}
+                توضیحاتی وجود ندارد ...
+                {% endif %}
+            </p>
+        </div>
+
+
+        <div id="tab-page-2" class="container tab-pane fade"><br>
+            <h4>
+                آمار
+            </h4>
+            <p>
+
+            </p>
+        </div>
+
+
+        <div id="tab-page-3" class="container tab-pane fade"><br>
+            <h4>
+                گفت و گو
+            </h4>
+            <p>
+
+            </p>
+        </div>
+
+
+    </div>
+</div>

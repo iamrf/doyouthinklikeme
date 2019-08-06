@@ -1,0 +1,17 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+404 - Page not found!
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center;margin: 2rem;padding: 2rem;">
+    <h1>
+        404
+    </h1>
+    <h2>
+        صفحه مورد نظر یافت نشد
+    </h2>
+    <br>
+    <a href="{%url 'polls:index' %}" class="btn btn-warning">بازگشت به خانه</a>
+</div>
+{% endblock %}

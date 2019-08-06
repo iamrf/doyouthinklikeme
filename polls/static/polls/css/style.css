@@ -1,0 +1,250 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+@viewport{
+    zoom: 1.0;
+    width: device-width;
+}
+    
+@font-face {
+    font-family: 'byekan';
+    src: url('../fonts/YekanWeb-Regular.woff');
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display:block !important;
+    }
+    .mobile-only {
+        display: none !important;
+    }
+    .mobile-only-block {
+        display: none !important;
+    }
+}
+ 
+@media (max-width: 768px) {
+    .desktop-only {
+        display:none !important;
+    }
+    .mobile-only {
+        display:flex !important;
+    }
+    .mobile-only-block {
+        display:block !important;
+    }
+}
+
+*{
+    outline: 0;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    direction: rtl;
+    font-family: 'byekan','ubuntu', Tahoma, 'Segoe UI', Verdana, sans-serif;
+    background: rgb(250, 250, 250);
+    transition: .5s;
+    overflow-x: hidden;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .3s;
+    height: 100%;
+    line-height: 2;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.full-view {
+    height: 100vh;  /* it means 100% viewport height */
+    height: 100%;   /* code on JQuery */
+    width : 100%;
+}
+
+/* for js Full cover image */
+.img-full {
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.img-fit {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+    transition: .3s;
+}
+
+a:hover{
+    color: rgba(98, 0, 0, 0.9);
+    transition: .3s;
+}
+
+.hand{
+    cursor: pointer;
+}
+
+section {
+    margin: 0;
+    padding: 0;
+}
+
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.section-post{
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: .1rem solid none;
+    border-radius: .5rem;
+    box-shadow: 0 0rem 1rem 0 rgba(0, 0, 0, 0.2);
+    color: #444;
+}
+
+.section-post:hover{
+    background-color: #eeeeee70;
+    box-shadow: 0 0rem 1rem 0 rgba(0, 0, 0, 0.2), 0 0 1.2rem 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    color: #000;
+}
+
+.section-link{
+    color: #000;
+}
+
+.section-link:hover{
+    color: #000;
+}
+
+.section-single-page{
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: .1rem solid none;
+    border-radius: .5rem;
+    box-shadow: 0 0rem 1rem 0 rgba(0, 0, 0, 0.2);
+    color: #222;
+}
+
+.section-single-page:hover{
+    box-shadow: 0 0rem 1rem 0 rgba(0, 0, 0, 0.2), 0 0 1.2rem 0 rgba(0, 0, 0, 0.3);
+}
+
+.progress-text{
+    display: block;
+    padding-top: .5rem;
+}
+
+.vote-box{
+    margin: 1rem;
+    padding: 1rem;
+    border: .1rem solid rgba(153, 153, 153, 0.150);
+    border-radius: .5rem;
+    text-align: center;
+}
+
+.vote-box-item{
+    margin-top: .5rem;
+}
+
+.pad{
+    color: #fff;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+}
+
+#time-box{
+    background-color: #fff;
+    padding: .5rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+
+}

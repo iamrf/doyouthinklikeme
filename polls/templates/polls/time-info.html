@@ -1,0 +1,46 @@
+<hr>
+<a href="#time-box" data-toggle="collapse" class="text-info"><i class="fa fa-thumb-tack"></i> &nbsp; اطلاعات</a>
+
+<div id="time-box" class="collapse">
+    <p>
+        {% if question.choice.date_limit_checker is 0 %}
+            <i class="fa fa-clock-o"></i> &nbsp;    محدودیت زمانی : <span class="text-danger"> دارد </span><br>
+            <i class="text-info fa fa-info"></i> &nbsp;       وضعیت : <span class="text-primary"> هنوز آغاز نشده است. </span><br>
+            <i class="text-info fa fa-hourglass-start"></i> &nbsp;    زمان شروع : <span class="text-primary">
+                {{ question.choice.fa_start_date.full }} - ساعت 
+                {{ question.choice.start_date.time }}
+            </span><br>
+            <i class="text-info fa fa-hourglass-end"></i> &nbsp;       زمان پایان : <span class="text-primary">
+                {{ question.choice.fa_end_date.full }} - ساعت 
+                {{ question.choice.end_date.time }}
+            </span>
+
+        {% elif question.choice.date_limit_checker is 1 %}
+            <i class="fa fa-clock-o"></i> &nbsp;    محدودیت زمانی : <span class="text-danger"> دارد </span><br>
+            <i class="text-success fa fa-info"></i> &nbsp;   وضعیت : <span class="text-success">     فعال    </span><br>
+            <i class="text-success fa fa-hourglass-start"></i> &nbsp;    زمان شروع : <span class="text-primary">
+                {{ question.choice.fa_start_date.full }} - ساعت 
+                {{ question.choice.start_date.time }}
+            </span><br>
+            <i class="text-success fa fa-hourglass-end"></i> &nbsp;   زمان پایان : <span class="text-primary">
+                {{ question.choice.fa_end_date.full }} - ساعت 
+                {{ question.choice.end_date.time }}
+            </span>
+
+        {% elif question.choice.date_limit_checker is 2 %}
+            <i class="fa fa-clock-o"></i> &nbsp;    محدودیت زمانی : <span class="text-danger"> دارد </span><br>
+            <i class="text-danger fa fa-info"></i> &nbsp;    وضعیت : <span class="text-danger">    به پایان رسیده    </span><br>
+            <i class="text-danger fa fa-hourglass-start"></i> &nbsp;    زمان شروع : <span class="text-primary">
+                {{ question.choice.fa_start_date.full }} - ساعت 
+                {{ question.choice.start_date.time }}
+            </span><br>
+            <i class="text-danger fa fa-hourglass-end"></i> &nbsp;    زمان پایان : <span class="text-primary">
+                {{ question.choice.fa_end_date.full }} - ساعت 
+                {{ question.choice.end_date.time }}
+            </span>
+        {% else %}
+        <i class="fa fa-clock-o"></i> &nbsp;    محدودیت زمانی : <span class="text-success"> ندارد </span><br>
+        <i class="text-success fa fa-info"></i> &nbsp;   وضعیت : <span class="text-success">     فعال    </span><br>
+        {% endif %}
+    </p>
+</div>
