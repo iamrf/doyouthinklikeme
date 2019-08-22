@@ -16,6 +16,12 @@
         {% block script %}{% endblock %}
     </head>
     <body>
+
+        <nav>
+            {% include 'polls/nav.html' %}
+            {% block navbar %}{% endblock %}
+        </nav>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

@@ -1,0 +1,13 @@
+{% extends 'polls/base.html' %}
+{% block content %}
+
+{% if error %}
+
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    <strong>خطا !</strong> &nbsp; {{ error }}
+</div>
+
+{% endif %}
+
+{% endblock %}

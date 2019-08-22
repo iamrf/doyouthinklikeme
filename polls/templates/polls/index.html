@@ -8,14 +8,14 @@ Do you think like me? - Home
 {% for question in questions %}
 <a href="{% url 'polls:q_page' question.id %}" class="section-link">
 <section class="section-post">
-    <header>
-        <h3>
-            {{ question.title }}
-        </h3><br>
-    </header>
-    <div class="clearfix"></div>
-
     <article>
+        <header>
+            <h3>
+                {{ question.title }}
+            </h3><br>
+        </header>
+
+        <div class="clearfix"></div>
         <div class="progress">
             <div class="progress-bar bg-success" style="width:{{ question.choice.p_percent }}%;height:2rem;">
                 <span class="progress-text ltr">

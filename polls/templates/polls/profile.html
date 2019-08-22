@@ -1,0 +1,39 @@
+{% extends 'polls/base.html' %}
+
+{% block title %}
+پروفایل     {{ user.username }}
+{% endblock%}
+
+{% block content %}
+
+<section class="section-post no-hand">
+    نام : {{ user.first_name }}<br>
+    نام خانوادگی : {{ user.last_name }}<br>
+    ایمیل : {{ user.email }}<br>
+    آخرین ورود : {{ user.last_login }}<br>
+    تاریخ ثبت نام : {{ user.date_joined }}
+    <div id="chpass">
+        {% if success %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+            {{ success }}<br>
+            برای ورود مجدد به حساب خود <a href="{% url 'polls:index' %}#user-sign" class="btn btn-dark">اینجا کلیک کنید</a>
+        </div>
+        {% elif error %}
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+            <strong>خطا !</strong> &nbsp; {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{% url 'polls:change_pass' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="old_pass" placeholder="رمز قدیمی">
+            <input type="password" name="new_pass" placeholder="رمز جدید">
+            <input type="password" name="re_pass" placeholder="تکرار رمز جدید">
+            <button type="submit" class="btn btn-dark hand">تغییر رمز</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
