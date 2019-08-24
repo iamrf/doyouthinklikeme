@@ -1,0 +1,32 @@
+{% for cmnt in question.comments_set.all %}
+    <span class="float-left">
+        <i class="fa fa-clock-o"></i>&nbsp;
+        {{ cmnt.jalali_date.full }} - {{ cmnt.date.time }}
+    </span>
+    <span class="float-right">
+        <i class="fa fa-user"></i>&nbsp;
+        {{ cmnt.user }}
+    </span><br> 
+    <p>
+        {{ cmnt.text }}
+    </p>
+{% empty %}
+    هیچ نظری یافت نشد.<br>
+{% endfor %}
+
+<br>
+
+{% if request.user.is_authenticated %}
+    <form action="{% url 'polls:comment' question.id%}" method="POST">
+    {% csrf_token %}
+        <textarea id="comment-inp" name="comment-inp" placeholder="نظر خود را بنویسید ..." required></textarea>
+        <button type="submit" class="btn btn-warning btn-block hand">ارسال</button>
+    </form>
+    {% else %}
+    <div class="alert alert-dark alert-dismissible text-center">
+        برای نظر دادن باید وارد حساب کاربری شوید <br>
+        <button type="button" class="btn btn-light hand" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-user"></i>&nbsp; ورود / ثبت نام
+        </button>
+    </div>
+{% endif %}

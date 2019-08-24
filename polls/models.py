@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 import datetime
 from .jalali_date_conv import shamsiDate
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -25,12 +26,21 @@ class Question(models.Model):
         return shamsiDate(gdate.year, gdate.month, gdate.day)
 
 
-class Comment(models.Model):
-    text = models.TextField()
+class Comments(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    text = models.TextField(blank=False, null=False)
     date = models.DateTimeField(auto_now_add=timezone.now())
 
-    def __st__(self):
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
         return self.text
+
+    def jalali_date(self):
+        gdate = self.date
+        return shamsiDate(gdate.year, gdate.month, gdate.day)
 
 
 class Choice(models.Model):
@@ -40,7 +50,6 @@ class Choice(models.Model):
     p_votes = models.IntegerField(default=0, verbose_name='Positive choice votes', blank=True, null=True)
     n_text = models.CharField(max_length=200, default='مخالفم', verbose_name='Negative choice text', blank=True, null=True)
     n_votes = models.IntegerField(default=0, verbose_name='Negative choice votes', blank=True, null=True)
-    comment = models.ManyToManyField(Comment, blank=True)
     date_limit = models.BooleanField(default=False)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)

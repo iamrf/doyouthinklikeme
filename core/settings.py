@@ -123,4 +123,4 @@ STATIC_URL = '/static/'
 
 
 
-LOGIN_URL = 'polls:index'
+LOGIN_URL = 'polls:user-signing'

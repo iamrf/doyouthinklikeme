@@ -261,3 +261,10 @@ section:after {
 .top-margin-5{
     margin-top: .5rem;
 }
+
+#comment-inp{
+    padding: .5rem;
+    margin-bottom: .5rem;
+    width: 100%;
+    height: 40vh;
+}

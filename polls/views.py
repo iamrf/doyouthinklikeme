@@ -19,7 +19,9 @@ def index(request):
 def q_page(request, id):
     question = get_object_or_404(Question, pk=id)
     if question.publish:
-        return render(request, 'polls/q_page.html', {'question': question})
+        return render(request, 'polls/q_page.html', {
+            'question': question,
+            })
     else:
         return render(request, 'polls/404.html')
 
@@ -85,7 +87,7 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('polls:index'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @login_required
@@ -141,3 +143,22 @@ def change_pass(request):
 
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def user_signing(request):
+    if not request.user.is_authenticated:
+        return render(request, 'polls/user-signing.html')
+    else:
+        return HttpResponseRedirect(reverse('polls:profile'))
+
+
+def comment(request, id):
+    cmnt = Comments()
+    try:
+        cmnt.user = request.user
+        cmnt.text = request.POST['comment-inp']
+        cmnt.question = get_object_or_404(Question, pk=id)
+        cmnt.save()
+    except:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

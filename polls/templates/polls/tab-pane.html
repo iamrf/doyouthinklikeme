@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#tab-page-3">
-            گفت و گو
+            تبادل نظر   &nbsp;<span class="badge badge-primary">{{ question.comments_set.count }}</span>
         </a>
         </li>
     </ul>
@@ -46,12 +46,7 @@
 
 
         <div id="tab-page-3" class="container tab-pane fade"><br>
-            <h4>
-                گفت و گو
-            </h4>
-            <p>
-
-            </p>
+            {% include 'polls/comments.html' %}
         </div>
 
 
