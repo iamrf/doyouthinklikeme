@@ -60,8 +60,32 @@ def shamsiDate(gyear, gmonth, gday):
             sd = gmod
             sm = int(gd/30) + 10
 
-    full = '%s/%s/%s' % (sy, sm, sd)
-    result = {'full': full, 'year': sy, 'month': sm, 'day': sd}
+    per_month = {
+        1: 'فروردین',
+        2: 'اردیبهشت',
+        3: 'خرداد',
+        4: 'تیر',
+        5: 'مرداد',
+        6: 'شهریور',
+        7: 'مهر',
+        8: 'آبان',
+        9: 'آذر',
+        10: 'دی',
+        11: 'بهمن',
+        12: 'اسفند',
+    }
+
+    full_numeric = '%s/%s/%s' % (sy, sm, sd)
+    full = '%s %s %s' % (sd, per_month[sm], sy)
+
+    result = {
+        'full': full,
+        'full_numeric': full_numeric,
+        'year': sy,
+        'month': sm,
+        'persian_month': per_month[sm],
+        'day': sd,
+        }
 
     return result
 
@@ -71,4 +95,3 @@ if __name__ == '__main__':
     print(x)
     y = shamsiDate(x.year, x.month, x.day)
     print('%d , %d , %d' % (y[0], y[1], y[2]))
-

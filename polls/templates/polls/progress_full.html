@@ -1,19 +1,31 @@
 <span class="float-left text-danger align-left">
-    {{ question.choice.n_text }} {{ question.choice.n_votes }}  رای      &nbsp; <i class="fa fa-circle"></i>
+    {{ question.n_text }} {{ question.n_votes }}  رای      &nbsp; <i class="fa fa-circle"></i>
 </span>
 <span class="float-right text-success">
-    <i class="fa fa-circle"></i> &nbsp; {{ question.choice.p_text }} {{ question.choice.p_votes }}   رای
+    <i class="fa fa-circle"></i> &nbsp; {{ question.p_text }} {{ question.p_votes }}   رای
 </span>
 <div class="clearfix"></div>
 <div class="progress">
-    <div class="progress-bar bg-success" style="width:{{ question.choice.p_percent }}%;height:2rem;">
+    <div class="progress-bar bg-success" style="width:
+    {% if question.p_percent %}
+    {{ question.p_percent }}%
+    {% else %}
+    50%
+    {% endif %};
+    height:2rem;">
         <span class="progress-text ltr">
-            {{ question.choice.p_percent|floatformat:1 }} %
+            {{ question.p_percent|floatformat:1 }} %
         </span>
     </div>
-    <div class="progress-bar bg-danger" style="width:{{ question.choice.n_percent }}%;height:2rem;">
+    <div class="progress-bar bg-danger" style="width:
+    {% if question.n_percent %}
+    {{ question.n_percent }}%
+    {% else %}
+    50%
+    {% endif %};
+    height:2rem;">
         <span class="progress-text ltr">
-                {{ question.choice.n_percent|floatformat:1 }} %
+                {{ question.n_percent|floatformat:1 }} %
         </span>
     </div>
 </div>

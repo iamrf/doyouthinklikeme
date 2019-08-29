@@ -79,6 +79,13 @@ table {
     }
 }
 
+@media only screen and (orientation: landscape) {
+}
+
+@media only screen and (orientation: portrait) {
+
+}
+
 *{
     outline: 0;
     box-sizing: border-box;
@@ -92,7 +99,7 @@ html {
 body{
     direction: rtl;
     font-family: 'byekan','ubuntu', Tahoma, 'Segoe UI', Verdana, sans-serif;
-    background: rgb(250, 250, 250);
+    background-color: rgb(250, 250, 250);
     transition: .5s;
     overflow-x: hidden;
     font-size: 1rem;
@@ -185,7 +192,7 @@ section:after {
 }
 
 .section-post{
-    margin: 2rem 0;
+    margin: 0 0 2rem 0;
     padding: 1.5rem;
     border: .1rem solid none;
     border-radius: .5rem;
@@ -209,7 +216,6 @@ section:after {
 }
 
 .section-single-page{
-    margin: 2rem 0;
     padding: 1.5rem;
     border: .1rem solid none;
     border-radius: .5rem;
@@ -226,16 +232,36 @@ section:after {
     padding-top: .5rem;
 }
 
-.vote-box{
-    margin: 1rem;
-    padding: 1rem;
-    border: .1rem solid rgba(153, 153, 153, 0.150);
-    border-radius: .5rem;
-    text-align: center;
+#vote-box{
+    border-radius: 1rem;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    width: 100%;
+    height: 4rem;
 }
 
-.vote-box-item{
-    margin-top: .5rem;
+.pbtn{
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    border: none;
+}
+
+.nbtn{
+    float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    border: none;
 }
 
 .pad{
@@ -249,8 +275,8 @@ section:after {
     padding: .5rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-
+    border-start-end-radius: 1rem;
+    border: .1rem solid #bbbbbb70;
 }
 
 .full-width{
@@ -266,5 +292,66 @@ section:after {
     padding: .5rem;
     margin-bottom: .5rem;
     width: 100%;
-    height: 40vh;
+    border: .1rem solid rgba(128, 128, 128, 0.15);
+    border-radius: .5rem;
+
 }
+
+.comment-box{
+    background-color: #fff;
+    margin: 0 0 .5rem;
+    padding: 1rem;
+    border: .1rem solid rgba(153, 153, 153, 0.150);
+    border-radius: .5rem;
+}
+
+.q-inp{
+    padding: .5rem;
+    margin-bottom: .5rem;
+    width: 100%;
+    border: .1rem solid rgba(128, 128, 128, 0.15);
+    border-radius: .5rem;
+}
+
+.tab-pane{
+    background-color: #fff !important;
+    padding: 0 0 1rem 0;
+    border-end-start-radius: 1rem;
+    border-end-end-radius: 1rem;
+    border-right: .1rem solid #bbbbbb70;
+    border-left: .1rem solid #bbbbbb70;
+    border-bottom: .1rem solid #bbbbbb70;
+
+}
+
+.half-width{
+    width: 50% !important;
+}
+
+#top-nav{
+    position: relative;
+    top:0;
+    width: 100%;
+    padding: .5rem;
+}
+
+#base-container{
+    padding: 1.5rem 0 5rem;
+}
+
+.error{
+    position: relative;
+    width: 100%;
+}
+
+.top-nav-right{
+    padding: 0 .5rem;
+}
+
+
+
+
+
+
+
+

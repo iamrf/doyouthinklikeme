@@ -4,5 +4,5 @@ from . import models
 
 
 admin.site.register(models.Question)
-admin.site.register(models.Choice)
 admin.site.register(models.Comments)
+admin.site.register(models.Tag)

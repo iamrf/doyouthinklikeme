@@ -1,26 +1,31 @@
 {% for cmnt in question.comments_set.all %}
-    <span class="float-left">
-        <i class="fa fa-clock-o"></i>&nbsp;
-        {{ cmnt.jalali_date.full }} - {{ cmnt.date.time }}
-    </span>
-    <span class="float-right">
-        <i class="fa fa-user"></i>&nbsp;
-        {{ cmnt.user }}
-    </span><br> 
-    <p>
-        {{ cmnt.text }}
-    </p>
+    <div class="comment-box">
+        <span class="float-left">
+            <i class="fa fa-calendar"></i>&nbsp;
+            {{ cmnt.jalali_date.full }}
+            ساعت&nbsp;
+            {{ cmnt.date.time }}
+        </span>
+        <span class="float-right">
+            <i class="fa fa-user"></i>&nbsp;
+            {{ cmnt.user }}
+        </span><br> 
+        <p>
+            {{ cmnt.text|linebreaks }}
+        </p>
+        <div class="clearfix"></div>
+    </div>
 {% empty %}
     هیچ نظری یافت نشد.<br>
 {% endfor %}
 
-<br>
+<hr>
 
 {% if request.user.is_authenticated %}
     <form action="{% url 'polls:comment' question.id%}" method="POST">
     {% csrf_token %}
         <textarea id="comment-inp" name="comment-inp" placeholder="نظر خود را بنویسید ..." required></textarea>
-        <button type="submit" class="btn btn-warning btn-block hand">ارسال</button>
+        <button type="submit" class="btn btn-warning btn-block hand">ارسال نظر</button>
     </form>
     {% else %}
     <div class="alert alert-dark alert-dismissible text-center">

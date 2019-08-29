@@ -13,6 +13,10 @@
     <div class="clearfix"></div>
     <article>
 
+        {% include 'polls/vote_box.html' %}
+
+        <div class="clearfix"></div>
+
         {% include 'polls/progress_full.html' %}
 
         <div class="clearfix"></div>
@@ -21,13 +25,14 @@
 
         <div class="clearfix"></div><br>
 
-        {% include 'polls/time-info.html' %}
+        {% for tag in question.tags.all %}
+        <a href="#" class="btn btn-sm btn-dark"><i class="fa fa-tag"></i>&nbsp; {{ tag.name }}</a>
+        {% endfor %}
+
+        {% include 'polls/collapse-info.html' %}
 
         <div class="clearfix"></div><br>
 
-        {% include 'polls/vote_box.html' %}
-
-        <div class="clearfix"></div>
     </article>
     <div class="clearfix"></div>
     <footer>

@@ -26,25 +26,23 @@ def q_page(request, id):
         return render(request, 'polls/404.html')
 
 
-def vote(request, id):
+def pvote(request, id):
     q = get_object_or_404(Question, pk=id)
     try:
-        if q.choice.date_limit_checker() == 1:
-            if request.POST['vote'] == 'plus':
-                    q.choice.p_votes += 1
-            elif request.POST['vote'] == 'minus':
-                    q.choice.n_votes += 1
+        if q.date_limit_checker() == 1:
+            if request.POST:
+                    q.p_votes += 1
             else:
                 return render(request, 'polls/q_page.html', {
                     'question': q,
-                    'error': 'خطایی رخ داده!',
+                    'error': 'خطا در ثبت رای !',
                 })
-        elif q.choice.date_limit_checker() == 0:
+        elif q.date_limit_checker() == 0:
             return render(request, 'polls/q_page.html', {
                     'question': q,
                     'error': 'این نظر سنجی دارای محدودیت زمانی است و هنوز شروع نشده!',
                 })
-        elif q.choice.date_limit_checker() == 2:
+        elif q.date_limit_checker() == 2:
             return render(request, 'polls/q_page.html', {
                     'question': q,
                     'error': 'این نظرسنجی دارای محدودیت زمانی بوده و مهلت آن به اتمام رسیده است.',
@@ -54,10 +52,43 @@ def vote(request, id):
     except:
         return render(request, 'polls/q_page.html', {
             'question': q,
-            'error': 'خطایی رخ داده!',
+            'error': 'خطا در ثبت رای !',
         })
     else:
-        q.choice.save()
+        q.save()
+        return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
+
+
+def nvote(request, id):
+    q = get_object_or_404(Question, pk=id)
+    try:
+        if q.date_limit_checker() == 1:
+            if request.POST:
+                    q.n_votes += 1
+            else:
+                return render(request, 'polls/q_page.html', {
+                    'question': q,
+                    'error': 'خطا در ثبت رای !',
+                })
+        elif q.date_limit_checker() == 0:
+            return render(request, 'polls/q_page.html', {
+                    'question': q,
+                    'error': 'این نظر سنجی دارای محدودیت زمانی است و هنوز شروع نشده!',
+                })
+        elif q.date_limit_checker() == 2:
+            return render(request, 'polls/q_page.html', {
+                    'question': q,
+                    'error': 'این نظرسنجی دارای محدودیت زمانی بوده و مهلت آن به اتمام رسیده است.',
+                })
+        else:
+            return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
+    except:
+        return render(request, 'polls/q_page.html', {
+            'question': q,
+            'error': 'خطا در ثبت رای !',
+        })
+    else:
+        q.save()
         return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
 
 
@@ -162,3 +193,34 @@ def comment(request, id):
     except:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+def add_q_page(request):
+    u = request.user
+    return render(request, 'polls/q_add.html', {
+        'user': u,
+    })
+
+
+def add_q(request):
+    q = Question()
+
+    try:
+        q.user = request.user
+        q.title = request.POST['title']
+        q.text = request.POST['desc']
+        if request.POST['p_text']:
+            q.p_text = request.POST['p_text']
+        if request.POST['n_text']:
+            q.n_text = request.POST['n_text']
+        if request.POST['publish']:
+            q.publish = True
+        else:
+            q.publish = False
+        q.save()
+    except:
+        return HttpResponseRedirect(reverse('polls:index'))
+    return render(request, 'polls/ch_add.html', {
+        'question': q,
+    })

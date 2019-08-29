@@ -16,18 +16,9 @@ Do you think like me? - Home
         </header>
 
         <div class="clearfix"></div>
-        <div class="progress">
-            <div class="progress-bar bg-success" style="width:{{ question.choice.p_percent }}%;height:2rem;">
-                <span class="progress-text ltr">
-                    {{ question.choice.p_percent|floatformat:1 }} %
-                </span>
-            </div>
-            <div class="progress-bar bg-danger" style="width:{{ question.choice.n_percent }}%;height:2rem;">
-                <span class="progress-text ltr">
-                        {{ question.choice.n_percent|floatformat:1 }} %
-                </span>
-            </div>
-        </div>
+
+        {% include 'polls/progress_full.html'%}
+
         <div class="clearfix"></div>
         <p>
             {{ question.text|linebreaks|truncatewords:50 }}
@@ -40,5 +31,11 @@ Do you think like me? - Home
     </footer>
 </section>
 </a>
+{% empty %}
+<section class="section-post no-hand text-center">
+    در حال حاضر هیچ نظرسنجی در دسترس نیست.   <br><br>
+    <a href="{% url 'polls:add_q_page' %}" class="btn btn-danger"><i class="fa fa-plus"></i>&nbsp;   نظر سنجی جدید بسازید    </a>
+
+</section>
 {% endfor %}
 {% endblock %}

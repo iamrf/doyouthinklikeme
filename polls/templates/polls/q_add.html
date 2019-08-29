@@ -1,0 +1,35 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+ساخت نظرسنجی جدید
+{% endblock %}
+
+{% block content %}
+
+<section class="section-post no-hand">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" action="{% url 'polls:add_q' %}">
+                {% csrf_token %}
+                <input type="text" id="title" name="title" placeholder="عنوان نظرسنجی" class="q-inp" required><br>
+                <textarea id="desc" name="desc" placeholder="توضیحات" class="q-inp"></textarea><br>
+                <input type="text" id="p_text" name="p_text" placeholder="متن جایگزین گزینه ی موافقم" class="q-inp">
+                <input type="text" id="n_text" name="n_text" placeholder="متن جایگزین گزینه ی مخالفم" class="q-inp"><br>
+
+                <input type="checkbox" name="publish" id="publish" checked>
+                <label for="publish">    منتشر شود   </label><br>
+                <button type="submit" class="btn btn-primary btn-block hand">     ثبت     </button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <span class="text-danger">
+                راهنما
+            </span>
+        </div>
+
+    </div>
+</div>
+
+</section>
+{% endblock %}
