@@ -6,33 +6,52 @@
 
 {% block content %}
 
+<div class="jumbotron text-center">
+    <h3>    پروفایل {{ user.get_full_name }} </h3>
+</div>
 <section class="section-post no-hand">
-    نام : {{ user.first_name }}<br>
-    نام خانوادگی : {{ user.last_name }}<br>
-    ایمیل : {{ user.email }}<br>
-    آخرین ورود : {{ user.last_login }}<br>
-    تاریخ ثبت نام : {{ user.date_joined }}
-    <div id="chpass">
-        {% if success %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close hand" data-dismiss="alert">&times;</button>
-            {{ success }}<br>
-            برای ورود مجدد به حساب خود <a href="{% url 'polls:index' %}#user-sign" class="btn btn-dark">اینجا کلیک کنید</a>
-        </div>
-        {% elif error %}
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close hand" data-dismiss="alert">&times;</button>
-            <strong>خطا !</strong> &nbsp; {{ error }}
-        </div>
-        {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div id="profile-info" class="col-md-6 bot-margin-5">
+                <p>
+                    <h4 class="text-center text-danger">    اطلاعات کاربر  </h4>
+                    نام کاربری : {{ user.username}}<br>
+                    نام : {{ user.first_name }}<br>
+                    نام خانوادگی : {{ user.last_name }}<br>
+                    ایمیل : {{ user.email }}<hr>
+                    تعداد فرم های ساخته شده : <span class="badge badge-danger"> {{ user.question_set.count }}</span><br>
+                    تعداد نظرهای کاربر : <span class="badge badge-danger"> {{ user.comments_set.count }}</span><hr>
+                    آخرین ورود : {{ user.last_login }}<br>
+                    تاریخ ثبت نام : {{ user.date_joined }}
+                </p>
+            </div>
 
-        <form action="{% url 'polls:change_pass' %}" method="POST">
-            {% csrf_token %}
-            <input type="text" name="old_pass" placeholder="رمز قدیمی">
-            <input type="password" name="new_pass" placeholder="رمز جدید">
-            <input type="password" name="re_pass" placeholder="تکرار رمز جدید">
-            <button type="submit" class="btn btn-dark hand">تغییر رمز</button>
-        </form>
+            <div id="profile-chpass" class="col-md-6">
+                <p>
+                    <h4 class="text-center text-danger">    تغییر رمز عبور  </h4><br>
+                    {% if success %}
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+                        {{ success }}<br>
+                        برای ورود مجدد به حساب خود <a href="{% url 'polls:index' %}#user-sign" class="btn btn-dark">اینجا کلیک کنید</a>
+                    </div>
+                    {% elif error %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+                        <strong>خطا !</strong> &nbsp; {{ error }}
+                    </div>
+                    {% endif %}
+
+                    <form action="{% url 'polls:change_pass' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="old_pass" placeholder="رمز قدیمی" class="full-width bot-margin-5"><br>
+                        <input type="password" name="new_pass" placeholder="رمز جدید" class="full-width bot-margin-5"><br>
+                        <input type="password" name="re_pass" placeholder="تکرار رمز جدید" class="full-width bot-margin-5"><br>
+                        <button type="submit" class="btn btn-dark btn-block hand">تغییر رمز</button>
+                    </form>
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 

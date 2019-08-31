@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block content %}
-<h2><i class="fa fa-user"></i>    فرم های کاربر   : {{ user.username }}    &nbsp; <span class="badge badge-danger">{{ user.question_set.count }}</span></h2><br>
+    <div class="jumbotron text-center">
+        <h2><i class="fa fa-user"></i>    فرم های کاربر   : {{ user.username }}    &nbsp; <span class="badge badge-danger">{{ user.question_set.count }}</span></h2>
+    </div>
 
     {% for question in user.question_set.all %}
     <a href="{% url 'polls:q_page' question.id %}" class="section-link">

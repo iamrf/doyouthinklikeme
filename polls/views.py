@@ -202,7 +202,7 @@ def add_q_page(request):
         'user': u,
     })
 
-
+@login_required
 def add_q(request):
     q = Question()
 
@@ -220,10 +220,10 @@ def add_q(request):
             q.publish = False
         q.save()
     except:
-        return HttpResponseRedirect(reverse('polls:index'))
-    return render(request, 'polls/ch_add.html', {
-        'question': q,
-    })
+        return render(request, 'polls/q_add.html', {
+            'error': 'خطا در ثبت فرم',
+        })
+    return HttpResponseRedirect(reverse('polls:index'))
 
 
 def tag(request, slug):
@@ -244,4 +244,33 @@ def user_poll(request, user):
     u = get_object_or_404(User, username=user)
     return render(request, 'polls/user-poll.html', {
         'user': u,
+    })
+
+
+@login_required
+def form_management(request):
+    u = request.user
+    return render(request, 'polls/form-management.html', {
+        'user': u,
+    })
+
+
+@login_required
+def delete_form(request, id):
+    u = request.user
+    q = get_object_or_404(Question, pk=id)
+    try:
+        q.delete()
+    except:
+        msg = 'فرآیند حذف فرم با خطا مواجه شد.'
+        return render(request, 'polls/form-management.html', {
+            'question': q,
+            'user': u,
+            'error': msg,
+        })
+    msg = 'فرم ' + q.title + ' با موفقیت حذف شد.'
+    return render(request, 'polls/form-management.html', {
+        'question': q,
+        'user': u,
+        'success': str(msg),
     })

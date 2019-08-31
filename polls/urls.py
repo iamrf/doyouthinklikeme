@@ -4,11 +4,13 @@ from . import views
 app_name = 'polls'
 
 urlpatterns = [
+    path('delete-form-<int:id>/', views.delete_form, name='delete-form'),
+    path('form-management/', views.form_management, name='form-management'),
     path('user/<str:user>/', views.user_poll, name='user-poll'),
     path('tags/', views.tags, name='tags'),
     path('tag/<slug:slug>/', views.tag, name='tag'),
     path('addq/', views.add_q, name="add_q"),
-    path('add_question/', views.add_q_page, name='add_q_page'),
+    path('add-a-form/', views.add_q_page, name='add_q_page'),
     path('comment-<int:id>/', views.comment, name='comment'),
     path('profile/', views.profile, name='profile'),
     path('change-password/', views.change_pass, name='change_pass'),

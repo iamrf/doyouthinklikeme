@@ -1,0 +1,38 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+{{ user.username }} - مدیریت فرم ها
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h3>    مدیریت فرم های کاربر   : {{ user.username }}    </h3>
+</div>
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible text-center">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    <strong>خطا !</strong><br> {{ error }}
+</div>
+{% elif success %}
+<div class="alert alert-success alert-dismissible text-center">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    {{ success }}
+</div>
+{% endif %}
+
+<section class="section-post no-hand">
+    {% for question in user.question_set.all %}
+    <a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+    <span class="float-left">
+    <a href="#" class="btn btn-success btn-sm form-management-btn"><i class="fa fa-pencil"></i>&nbsp; ویرایش</a>
+    <button type="button" class="btn btn-danger btn-sm form-management-btn hand" data-toggle="modal" data-target="#delete-alert{{ question.id }}">
+        <i class="fa fa-eraser"></i>&nbsp; پاک کردن
+    </button>
+    {% include 'polls/delete-modal.html' %}
+    </span>
+    <div class="clearfix"></div>
+    <hr>
+    {% endfor%}
+</section>
+
+{% endblock%}

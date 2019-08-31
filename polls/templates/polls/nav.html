@@ -17,7 +17,7 @@
                 <div class="dropdown-menu">
                     <h5 class="dropdown-header">    خوش آمدید   {{ request.user.username }}   </h5>
                     <a class="dropdown-item" href="{% url 'polls:profile' %}">    پروفایل کاربر   </a>
-                    <a class="dropdown-item" href="#">  تغییر رمز عبور  </a>
+                    <a class="dropdown-item" href="{% url 'polls:profile' %}#profile-chpass">  تغییر رمز عبور  </a>
                     <a class="dropdown-item" href="{% url 'polls:logout' %}"><i class="fa fa-sign-out"></i>&nbsp;   خروج</a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="dropdown-menu rtl">
                     <h5 class="dropdown-header">ابزار نظرسنجی</h5>
                     <a class="dropdown-item bg-warning" href="{% url 'polls:add_q_page' %}"><i class="fa fa-plus"></i>&nbsp; فرم جدید </a>
-                    <a class="dropdown-item" href="#">مدیریت فرم ها</a>
+                    <a class="dropdown-item" href="{% url 'polls:form-management' %}">مدیریت فرم ها</a>
                     <a class="dropdown-item" href="#">راهنما</a>
                 </div>
             </div>

@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block content %}
-<h2><i class="fa fa-tag"></i>    برچسب   : {{ tag.name }}    &nbsp; <span class="badge badge-danger">{{ tag.question_set.count }}</span></h2><br>
+    <div class="jumbotron text-center">
+        <h3><i class="fa fa-tag"></i>    برچسب   : {{ tag.name }}    &nbsp; <span class="badge badge-danger">{{ tag.question_set.count }}</span></h3>
+    </div>
     {% for question in tag.question_set.all %}
     <a href="{% url 'polls:q_page' question.id %}" class="section-link">
     <section class="section-post">

@@ -25,10 +25,12 @@
 
         <div class="clearfix"></div><br>
 
+        {% if question.tags.all %}
         برچسب ها : &nbsp;
         {% for tag in question.tags.all %}
         <a href="{{ tag.get_absolute_url }}" class="btn btn-sm btn-dark tag-btn"><i class="fa fa-tag"></i>&nbsp; {{ tag.name }}</a>
         {% endfor %}
+        {% endif %}
 
         {% include 'polls/collapse-info.html' %}
 

@@ -5,27 +5,49 @@
 
 {% block content %}
 
+{% if error %}
+<div class="alert alert-danger alert-dismissible text-center">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    <strong>خطا !</strong><br> {{ error }}
+</div>
+{% endif %}
+<div class="jumbotron text-center">
+    <h3>    ساخت فرم نظرسنجی جدید   </h3>
+</div>
 <section class="section-post no-hand">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
-            <form method="POST" action="{% url 'polls:add_q' %}">
-                {% csrf_token %}
-                <input type="text" id="title" name="title" placeholder="عنوان نظرسنجی" class="q-inp" required><br>
-                <textarea id="desc" name="desc" placeholder="توضیحات" class="q-inp"></textarea><br>
-                <input type="text" id="p_text" name="p_text" placeholder="متن جایگزین گزینه ی موافقم" class="q-inp">
-                <input type="text" id="n_text" name="n_text" placeholder="متن جایگزین گزینه ی مخالفم" class="q-inp"><br>
+        <div class="col-md-6 bot-margin-5">
+            <p>
+                <form method="POST" action="{% url 'polls:add_q' %}">
+                    {% csrf_token %}
+                    <input type="text" id="title" name="title" placeholder="عنوان نظرسنجی" class="q-inp" required><br>
+                    <textarea id="desc" name="desc" placeholder="توضیحات" class="q-inp"></textarea><br>
+                    <input type="text" id="p_text" name="p_text" placeholder="متن جایگزین گزینه ی موافقم" class="q-inp">
+                    <input type="text" id="n_text" name="n_text" placeholder="متن جایگزین گزینه ی مخالفم" class="q-inp"><br>
 
-                <input type="checkbox" name="publish" id="publish" checked>
-                <label for="publish">    منتشر شود   </label><br>
-                <button type="submit" class="btn btn-primary btn-block hand">     ثبت     </button>
-            </form>
+                    <input type="checkbox" name="publish" id="publish" checked>
+                    <label for="publish">    منتشر شود   </label><br>
+                    <button type="submit" class="btn btn-primary btn-block hand">     ثبت     </button>
+                </form>
+            </p>
         </div>
 
-        <div class="col-md-6">
-            <span class="text-danger">
-                راهنما
-            </span>
+        <div class="col-md-6 top-margin-5">
+            <p>
+                نام کاربر‌: {{ request.user }}<hr>
+                <span class="text-danger">
+                    راهنما
+                </span>
+                <ul>
+                    <li>
+                    -    پر کردن فیلد "عنوان نظرسنجی" الزامیست.
+                    </li>
+                    <li>
+                    -    اگر میخواهید متن گزینه های پیشفرض را تغییر دهید از طریق فیلدهای متن جایگزین این کار را انجام دهید.
+                    </li>
+                </ul>
+            </p>
         </div>
 
     </div>
