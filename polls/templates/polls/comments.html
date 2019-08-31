@@ -7,8 +7,9 @@
             {{ cmnt.date.time }}
         </span>
         <span class="float-right">
-            <i class="fa fa-user"></i>&nbsp;
+            <a href="{% url 'polls:user-poll' cmnt.user %}"><i class="fa fa-user"></i>&nbsp;
             {{ cmnt.user }}
+            </a>
         </span><br> 
         <p>
             {{ cmnt.text|linebreaks }}

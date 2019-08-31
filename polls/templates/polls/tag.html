@@ -1,0 +1,42 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+    برچسب : {{ tag.name }}
+{% endblock %}
+
+{% block content %}
+<h2><i class="fa fa-tag"></i>    برچسب   : {{ tag.name }}    &nbsp; <span class="badge badge-danger">{{ tag.question_set.count }}</span></h2><br>
+    {% for question in tag.question_set.all %}
+    <a href="{% url 'polls:q_page' question.id %}" class="section-link">
+    <section class="section-post">
+        <article>
+            <header>
+                <h3>
+                    {{ question.title }}
+                </h3><br>
+            </header>
+
+            <div class="clearfix"></div>
+
+            {% include 'polls/progress_full.html'%}
+
+            <div class="clearfix"></div>
+            <p>
+                {{ question.text|linebreaks|truncatewords:50 }}
+            </p>
+        </article>
+        <div class="clearfix"></div>
+
+        <footer style="text-align: center"> 
+            <a href="{% url 'polls:q_page' question.id %}#vote-box" class="btn btn-block btn-outline-dark"><i class="fa fa-ticket"></i> رای دهید</a>
+        </footer>
+    </section>
+    </a>
+    {% empty %}
+    <section class="section-post no-hand text-center">
+        هیچ فرمی با برچسب   "{{ tag.name }}" موجود نیست.   <br><br>
+        <a href="{% url 'polls:index' %}" class="btn btn-danger tag-btn"><i class="fa fa-home"></i>&nbsp;   رفتن به صفحه اصلی    </a><br>
+        <a href="{% url 'polls:tags' %}" class="btn btn-danger tag-btn"><i class="fa fa-tags"></i>&nbsp;   رفتن به صفحه برچسب ها    </a>
+
+    </section>
+    {% endfor %}
+{% endblock %}

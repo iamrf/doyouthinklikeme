@@ -17,6 +17,9 @@
     <div class="tab-content">
 
         <div id="tab-page-1" class="container tab-pane active"><br>
+
+            <p><a href="{% url 'polls:user-poll' question.user %}"> <i class="fa fa-user"></i>&nbsp; {{ question.user.username }}</a></p>
+
             <h4>
                 <i class="fa fa-list-alt"></i> &nbsp;    توضیحات بیشتر
             </h4>

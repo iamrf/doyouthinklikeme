@@ -224,3 +224,24 @@ def add_q(request):
     return render(request, 'polls/ch_add.html', {
         'question': q,
     })
+
+
+def tag(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    return render(request, 'polls/tag.html', {
+        'tag': tag,
+    })
+
+
+def tags(request):
+    tags = Tag.objects.all()
+    return render(request, 'polls/tags.html', {
+        'tags': tags,
+    })
+
+
+def user_poll(request, user):
+    u = get_object_or_404(User, username=user)
+    return render(request, 'polls/user-poll.html', {
+        'user': u,
+    })

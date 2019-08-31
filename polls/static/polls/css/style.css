@@ -348,10 +348,13 @@ section:after {
     padding: 0 .5rem;
 }
 
+.tag-btn{
+    margin: .3rem !important;
+}
 
-
-
-
-
-
-
+.tags-empty{
+    display: block;
+    min-width: 100%;
+    overflow: hidden;
+    text-align: center;
+}

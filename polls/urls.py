@@ -4,6 +4,9 @@ from . import views
 app_name = 'polls'
 
 urlpatterns = [
+    path('user/<str:user>/', views.user_poll, name='user-poll'),
+    path('tags/', views.tags, name='tags'),
+    path('tag/<slug:slug>/', views.tag, name='tag'),
     path('addq/', views.add_q, name="add_q"),
     path('add_question/', views.add_q_page, name='add_q_page'),
     path('comment-<int:id>/', views.comment, name='comment'),
@@ -15,6 +18,6 @@ urlpatterns = [
     path('user-signing/', views.user_signing, name="user-signing"),
     path('pvote/<int:id>/', views.pvote, name='pvote'),
     path('nvote/<int:id>/', views.nvote, name='nvote'),
-    path('q-<int:id>/', views.q_page, name='q_page'),
+    path('poll-<int:id>/', views.q_page, name='q_page'),
     path('', views.index, name='index'),
 ]

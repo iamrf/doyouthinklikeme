@@ -4,19 +4,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<section class="section-post no-hand">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
+            <p>
             <h3>ورود کاربر </h3>
             <form action="{% url 'polls:login' %}" method="POST">
                 {% csrf_token %}
                 <input type="text" class="full-width ltr top-margin-5" class="ltr" id="username" name="username" placeholder="نام کاربری"><br>
-                <input type="password" class="full-width ltr top-margin-5" class="ltr" id="password" name="password" placeholder="رمز"><br>
+                <input type="password" class="full-width ltr top-margin-5" class="ltr" id="password" name="password" placeholder="رمز عبور"><br>
                 <button type="submit" class="btn btn-dark btn-block hand top-margin-5"><i class="fa fa-sign-in fa-rotate-180"></i>&nbsp; ورود</button>
             </form>
+            </p>
         </div>
-
+        <div class="clearfix"></div>
         <div class="col-md-6">
+            <p>
             <h3>ثبت نام کاربر جدید</h3>
             <form action="{% url 'polls:signup' %}" method="POST">
                 {% csrf_token %}
@@ -25,7 +29,10 @@
                 <input type="password" class="full-width ltr top-margin-5" name="password" id="signup_pass" placeholder="رمز عبور" required><br>
                 <button type="submit" class="btn btn-warning btn-block hand top-margin-5"><i class="fa fa-user-plus"></i>&nbsp;   ثبت نام</button>
             </form>
+            </p>
         </div>
+        <div class="clearfix"></div>
     </div>
 </div>
+</section>
 {% endblock %}

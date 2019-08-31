@@ -17,11 +17,13 @@
     </head>
     <body>
 
-        <nav>
-            {% include 'polls/nav.html' %}
-            {% block navbar %}{% endblock %}
-        </nav>
-
+        <header>
+            <nav>
+                {% include 'polls/nav.html' %}
+                {% block navbar %}{% endblock %}
+            </nav>
+        </header>
+        
         <div class="container" id="base-container">
             <div class="row">
                 <div class="col-md-12">
@@ -29,6 +31,10 @@
                 </div>
             </div>
         </div>
+
+        <footer>
+
+        </footer>
 
     </body>
 </html>

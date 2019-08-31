@@ -3,16 +3,20 @@ from django.utils import timezone
 import datetime
 from .jalali_date_conv import shamsiDate
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=250, unique=True)
-    slg = models.SlugField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=250, unique=True)
 
     def __str__(self):
-        return str(self.name) + " ----- " + str(self.slg)
+        return str(self.name)
+
+    def get_absolute_url(self):
+        return '/tag/%s/' % slugify(self.slug)
 
 
 class Question(models.Model):
@@ -31,6 +35,9 @@ class Question(models.Model):
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
     tags = models.ManyToManyField(Tag)
+
+    class Meta:
+        ordering = ['-date_created']
 
     def __str__(self):
         return self.title
