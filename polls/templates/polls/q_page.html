@@ -4,6 +4,13 @@
 {% endblock %}
 
 {% block content %}
+{% if not_pub_err %}
+<div class="alert alert-danger alert-dismissible text-center top-error">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    {{ not_pub_err }}<br>
+    <a href="{% url 'polls:edit-form-page' question.id %}" class="btn btn-danger btn-sm"><i class="fa fa-pencil"></i>&nbsp;    ویرایش فرم    </a>
+</div>
+{% endif %}
 <section class="section-single-page">
     <header>
         <h3>

@@ -322,7 +322,7 @@ section:after {
     padding: 0 0 1rem 0;
     border-end-start-radius: 1rem;
     border-end-end-radius: 1rem;
-    border-right: .1rem solid #bbbbbb70;
+    border-right: .1rem solid #a1a1a170;
     border-left: .1rem solid #bbbbbb70;
     border-bottom: .1rem solid #bbbbbb70;
 
@@ -365,4 +365,8 @@ section:after {
 
 .form-management-btn{
     margin: .2rem .3rem;
+}
+
+.top-error{
+    margin: 1rem 0 2.2rem !important;
 }

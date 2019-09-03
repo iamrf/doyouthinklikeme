@@ -1,0 +1,43 @@
+{% extends 'polls/base.html' %}
+{% block title %}
+{{ question.title|truncatewords:20 }} - ویرایش فرم
+{% endblock %}
+
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible text-center top-error">
+    <button type="button" class="close hand" data-dismiss="alert">&times;</button>
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="jumbotron text-center">
+    <h3>    ویرایش فرم  : {{ question.title|truncatewords:20 }}    </h3>
+</div>
+<section class="section-post no-hand">
+<form action="{% url 'polls:edit-form' question.id %}" method="POST">
+
+{% csrf_token %}
+<label for="q-title">عنوان :</label>
+<input type="text" class="q-inp" name="q_title" id="q-title" placeholder="{{ question.title }}">
+<label for="q-text">توضیحات :</label>
+<textarea type="text" class="q-inp" name="q_text" id="q-text" placeholder="{{ question.text }}"></textarea>
+<label for="p-text">متن جایگزین گزینه ی موافق :</label>
+<input type="text" class="q-inp" name="p_text" id="p-text" placeholder="{{ question.p_text }}">
+<label for="n-text">متن جایگزین گزینه ی مخالف :</label>
+<input type="text" class="q-inp" name="n_text" id="n-text" placeholder="{{ question.n_text }}">
+<label for="q-publish">منتشر شود؟ </label>
+<input type="checkbox" class="" name="q_publish" id="q-publish" value="True" {% if question.publish %}checked{% endif %}><br>
+<div class="q-inp bg-light">
+    برچسب ها: <br>
+    {% for tag in tags %}
+    <label for="q-tag-{{tag.id}}">{{ tag.name }}</label>
+    <input type="checkbox" class="" name="q_tag" id="q-tag-{{tag.id}}" value="{{ tag.id }}" {% if tag in question.tags.all %}checked{% endif %}>&nbsp;
+    {% endfor %}
+</div><br>
+<button type="submit" class="btn btn-block btn-warning hand">ویرایش فرم</button>
+
+</form>
+</section>
+{% endblock%}

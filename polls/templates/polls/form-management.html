@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="jumbotron text-center">
-    <h3>    مدیریت فرم های کاربر   : {{ user.username }}    </h3>
+    <h3>    مدیریت فرم های کاربر   : {{ user.username }} &nbsp;<span class="badge badge-danger">{{ user.question_set.count }}</span>    </h3>
 </div>
 
 {% if error %}
@@ -21,10 +21,18 @@
 {% endif %}
 
 <section class="section-post no-hand">
+
     {% for question in user.question_set.all %}
-    <a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+    <a href="{{ question.get_absolute_url }}">{{ question.title|truncatewords:22 }}</a>
     <span class="float-left">
-    <a href="#" class="btn btn-success btn-sm form-management-btn"><i class="fa fa-pencil"></i>&nbsp; ویرایش</a>
+
+    {% if question.publish %}
+        <i class="fa fa-eye text-success"></i>
+    {% else %}
+        <i class="fa fa-eye-slash text-danger"></i>
+    {% endif %}
+
+    <a href="{% url 'polls:edit-form-page' question.id %}" class="btn btn-success btn-sm form-management-btn"><i class="fa fa-pencil"></i>&nbsp; ویرایش</a>
     <button type="button" class="btn btn-danger btn-sm form-management-btn hand" data-toggle="modal" data-target="#delete-alert{{ question.id }}">
         <i class="fa fa-eraser"></i>&nbsp; پاک کردن
     </button>
@@ -32,6 +40,14 @@
     </span>
     <div class="clearfix"></div>
     <hr>
+
+    {% empty %}
+        <div class="text-center">
+            <h3>    شما هیچ فرمی نساخته اید.    </h3><br>
+            <a href="{% url 'polls:add_q_page' %}" class="btn btn-success tag-btn"><i class="fa fa-plus"></i>&nbsp;   فرم جدید بسازید    </a><br>
+            <a href="{% url 'polls:index' %}" class="btn btn-danger tag-btn"><i class="fa fa-home"></i>&nbsp;   رفتن به صفحه اصلی    </a>
+        </div>
+
     {% endfor%}
 </section>
 

@@ -43,7 +43,7 @@ class Question(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return '/poll-%s/' % self.id
+        return '/form-%s/' % self.id
 
     def jalali_date(self):
         gdate = self.date

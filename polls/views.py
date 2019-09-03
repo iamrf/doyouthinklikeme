@@ -18,9 +18,22 @@ def index(request):
 
 def q_page(request, id):
     question = get_object_or_404(Question, pk=id)
+    u = request.user
+    if u == question.user:
+        user_is_same = True
+    else:
+        user_is_same = False
+
     if question.publish:
         return render(request, 'polls/q_page.html', {
             'question': question,
+            'user_is_same': user_is_same,
+            })
+    elif not question.publish and user_is_same:
+        return render(request, 'polls/q_page.html', {
+            'question': question,
+            'user_is_same': user_is_same,
+            'not_pub_err': 'این فرم در وضعیت عدم انتشار است. در این حالت فرم شما به نمایش عموم در نمی آید وتنها خودتان میتوانید این فرم نظرسنجی را مشاهده کنید.',
             })
     else:
         return render(request, 'polls/404.html')
@@ -204,26 +217,31 @@ def add_q_page(request):
 
 @login_required
 def add_q(request):
+    limit = 5
+    u = request.user
     q = Question()
-
     try:
         q.user = request.user
         q.title = request.POST['title']
         q.text = request.POST['desc']
+        q.publish = request.POST.get('publish', False)
         if request.POST['p_text']:
             q.p_text = request.POST['p_text']
         if request.POST['n_text']:
             q.n_text = request.POST['n_text']
-        if request.POST['publish']:
-            q.publish = True
-        else:
-            q.publish = False
-        q.save()
     except:
         return render(request, 'polls/q_add.html', {
-            'error': 'خطا در ثبت فرم',
+            'user': u,
+            'error': 'مشکل در ثبت فرم',
         })
-    return HttpResponseRedirect(reverse('polls:index'))
+    if u.question_set.count() >= int(limit) and limit != 0:
+        return render(request, 'polls/q_add.html', {
+            'user': u,
+            'error': 'شما مجاز به ساخت حداکثر %s فرم هستید.' % limit,
+        })
+    else:
+        q.save()
+        return HttpResponseRedirect(reverse('polls:q_page', args=[q.id]))
 
 
 def tag(request, slug):
@@ -274,3 +292,47 @@ def delete_form(request, id):
         'user': u,
         'success': str(msg),
     })
+
+
+@login_required
+def edit_form_page(request, id):
+    tags = Tag.objects.all()
+    u = request.user
+    q = get_object_or_404(Question, pk=id)
+    return render(request, 'polls/form-edit.html', {
+        'user': u,
+        'question': q,
+        'tags': tags,
+    })
+
+
+@login_required
+def edit_form(request, id):
+    q = get_object_or_404(Question, pk=id)
+    try:
+        if request.POST['q_title']:
+            q.title = request.POST['q_title']
+        if request.POST['q_text']:
+            q.text = request.POST['q_text']
+        if request.POST['p_text']:
+            q.p_text = request.POST['p_text']
+        if request.POST['n_text']:
+            q.n_text = request.POST['n_text']
+
+        q.publish = request.POST.get('q_publish', False)
+
+        list_of_tags = request.POST.getlist('q_tag')
+        q.tags.set(list_of_tags)
+
+    except:
+        tags = Tag.objects.all()
+        u = request.user
+        return render(request, 'polls/form-edit.html', {
+            'user': u,
+            'question': q,
+            'tags': tags,
+            'error': 'مشکل در ذخیره کردن اطلاعات',
+        })
+    else:
+        q.save()
+        return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
