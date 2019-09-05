@@ -32,6 +32,10 @@
         <i class="fa fa-eye-slash text-danger"></i>
     {% endif %}
 
+    &nbsp;
+
+    <span class="badge badge-dark">{{ question.sum_votes }}</span>
+
     <a href="{% url 'polls:edit-form-page' question.id %}" class="btn btn-success btn-sm form-management-btn"><i class="fa fa-pencil"></i>&nbsp; ویرایش</a>
     <button type="button" class="btn btn-danger btn-sm form-management-btn hand" data-toggle="modal" data-target="#delete-alert{{ question.id }}">
         <i class="fa fa-eraser"></i>&nbsp; پاک کردن

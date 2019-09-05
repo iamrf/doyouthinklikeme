@@ -90,10 +90,14 @@ class Question(models.Model):
         gdate = self.end_date
         return shamsiDate(gdate.year, gdate.month, gdate.day)
 
+    def sum_votes(self):
+        return self.p_votes + self.n_votes
+
 
 class VoteHistory(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=timezone.now(), verbose_name='date')
+    user = models.CharField(max_length=150, verbose_name='username')
     ip = models.CharField(max_length=50, verbose_name='voted ip')
     choice = models.CharField(max_length=50, verbose_name='choice')
 
@@ -101,7 +105,7 @@ class VoteHistory(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return self.ip
+        return str(self.user) + ' ' + str(self.ip)
 
 
 class Comments(models.Model):

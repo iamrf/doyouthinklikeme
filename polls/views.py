@@ -23,7 +23,7 @@ def q_page(request, id):
     question = get_object_or_404(Question, pk=id)
     u = request.user
     vh = VoteHistory()
-    if VoteHistory.objects.filter(question_id=question.id, ip=str(ip_req)):
+    if VoteHistory.objects.filter(question_id=question.id, ip=str(ip_req)) or VoteHistory.objects.filter(question_id=question.id, user=u.username):
         voted = True
     else:
         voted = False
@@ -55,7 +55,7 @@ def pvote(request, id):
 
     q = get_object_or_404(Question, pk=id)
     vh = VoteHistory()
-    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)):
+    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)) or VoteHistory.objects.filter(question_id=q.id, user=request.user.username):
         voted = True
         return render(request, 'polls/q_page.html', {
                 'question': q,
@@ -69,6 +69,7 @@ def pvote(request, id):
                 q.p_votes += 1
 
                 vh.question = q
+                vh.user = request.user.username
                 vh.ip = str(ip_req)
                 vh.choice = '+'
 
@@ -105,7 +106,7 @@ def nvote(request, id):
 
     q = get_object_or_404(Question, pk=id)
     vh = VoteHistory()
-    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)):
+    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)) or VoteHistory.objects.filter(question_id=q.id, user=request.user.username):
         voted = True
         return render(request, 'polls/q_page.html', {
                 'question': q,
@@ -119,6 +120,7 @@ def nvote(request, id):
                 q.n_votes += 1
 
                 vh.question = q
+                vh.user = request.user.username
                 vh.ip = str(ip_req)
                 vh.choice = '-'
             else:
@@ -189,8 +191,11 @@ def profile(request):
         client_ip
     ip_req = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '')).split(',')[0].strip()
 
+    vh = VoteHistory.objects.filter(user=u.username)
+
     return render(request, 'polls/profile.html', {
         'user': u,
+        'vote_history': vh,
         'ip_ipware': client_ip,
         'ip_request': ip_req,
     })
