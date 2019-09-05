@@ -91,6 +91,19 @@ class Question(models.Model):
         return shamsiDate(gdate.year, gdate.month, gdate.day)
 
 
+class VoteHistory(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=timezone.now(), verbose_name='date')
+    ip = models.CharField(max_length=50, verbose_name='voted ip')
+    choice = models.CharField(max_length=50, verbose_name='choice')
+
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
+        return self.ip
+
+
 class Comments(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

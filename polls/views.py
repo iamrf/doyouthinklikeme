@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from ipware import get_client_ip
 
 # Create your views here.
 
@@ -17,8 +18,16 @@ def index(request):
 
 
 def q_page(request, id):
+    ip_req = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '')).split(',')[0].strip()
+
     question = get_object_or_404(Question, pk=id)
     u = request.user
+    vh = VoteHistory()
+    if VoteHistory.objects.filter(question_id=question.id, ip=str(ip_req)):
+        voted = True
+    else:
+        voted = False
+
     if u == question.user:
         user_is_same = True
     else:
@@ -28,11 +37,13 @@ def q_page(request, id):
         return render(request, 'polls/q_page.html', {
             'question': question,
             'user_is_same': user_is_same,
+            'voted': voted,
             })
     elif not question.publish and user_is_same:
         return render(request, 'polls/q_page.html', {
             'question': question,
             'user_is_same': user_is_same,
+            'voted': voted,
             'not_pub_err': 'این فرم در وضعیت عدم انتشار است. در این حالت فرم شما به نمایش عموم در نمی آید وتنها خودتان میتوانید این فرم نظرسنجی را مشاهده کنید.',
             })
     else:
@@ -40,11 +51,27 @@ def q_page(request, id):
 
 
 def pvote(request, id):
+    ip_req = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '')).split(',')[0].strip()
+
     q = get_object_or_404(Question, pk=id)
+    vh = VoteHistory()
+    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)):
+        voted = True
+        return render(request, 'polls/q_page.html', {
+                'question': q,
+                'error': 'شما قبلا رای دادید.',
+            })
+    else:
+        voted = False
     try:
-        if q.date_limit_checker() == 1:
+        if q.date_limit_checker() == 1 and not voted:
             if request.POST:
-                    q.p_votes += 1
+                q.p_votes += 1
+
+                vh.question = q
+                vh.ip = str(ip_req)
+                vh.choice = '+'
+
             else:
                 return render(request, 'polls/q_page.html', {
                     'question': q,
@@ -69,15 +96,31 @@ def pvote(request, id):
         })
     else:
         q.save()
+        vh.save()
         return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
 
 
 def nvote(request, id):
+    ip_req = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '')).split(',')[0].strip()
+
     q = get_object_or_404(Question, pk=id)
+    vh = VoteHistory()
+    if VoteHistory.objects.filter(question_id=q.id, ip=str(ip_req)):
+        voted = True
+        return render(request, 'polls/q_page.html', {
+                'question': q,
+                'error': 'شما قبلا رای دادید.',
+            })
+    else:
+        voted = False
     try:
-        if q.date_limit_checker() == 1:
+        if q.date_limit_checker() == 1 and not voted:
             if request.POST:
-                    q.n_votes += 1
+                q.n_votes += 1
+
+                vh.question = q
+                vh.ip = str(ip_req)
+                vh.choice = '-'
             else:
                 return render(request, 'polls/q_page.html', {
                     'question': q,
@@ -102,6 +145,7 @@ def nvote(request, id):
         })
     else:
         q.save()
+        vh.save()
         return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
 
 
@@ -137,8 +181,18 @@ def signout(request):
 @login_required
 def profile(request):
     u = request.user
+
+    client_ip, is_routable = get_client_ip(request)
+    if client_ip is None:
+        pass
+    else:
+        client_ip
+    ip_req = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '')).split(',')[0].strip()
+
     return render(request, 'polls/profile.html', {
         'user': u,
+        'ip_ipware': client_ip,
+        'ip_request': ip_req,
     })
 
 

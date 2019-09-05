@@ -5,6 +5,7 @@ Do you think like me? - Home
 {% endblock %}
 
 {% block content %}
+{{ xxx }}<br>{{ ipp }}
 {% for question in questions %}
 <a href="{% url 'polls:q_page' question.id %}" class="section-link">
 <section class="section-post">
