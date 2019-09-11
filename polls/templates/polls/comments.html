@@ -10,7 +10,8 @@
             <a href="{% url 'polls:user-poll' cmnt.user %}"><i class="fa fa-user"></i>&nbsp;
             {{ cmnt.user }}
             </a>
-        </span><br> 
+        </span>
+        <div class="clearfix"></div>
         <p>
             {{ cmnt.text|linebreaks }}
         </p>
