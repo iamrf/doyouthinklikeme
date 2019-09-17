@@ -400,7 +400,7 @@ def edit_form(request, id):
 def intro(request):
     u = request.user
     q = Question.objects.all()[:6]
-    exmp_q = Question.objects.get(pk=44)
+    exmp_q = get_object_or_404(Question, pk=1)
     return render(request, 'intro/index.html', {
         'question': exmp_q,
         'questions': q,
