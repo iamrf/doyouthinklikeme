@@ -1,0 +1,56 @@
+<div class="container">
+
+    <h2 class="sec-title text-light bg-dark text-center">
+        کمی بیشتر درباره 
+        <strong>
+            شما هم مثل من فکر میکنید؟
+        </strong>
+    </h2>
+
+    <div class="clearfix"></div>
+    <br>
+
+    <div class="row">
+        <div class="col-md-12 text-dark">
+            <i class="fa fa-star"></i>&nbsp; این یک نمونه فرم نظرسنجی است:
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-dark">
+                        {{ question.title }}
+                    </h2>
+                    {% include 'polls/progress_full.html' %}
+                    <br>
+                    <p>
+                            کره زمین، از یخ‌بندان‌های طولانی و اتفاقاتی بسیار سنگین‌تر از حضور انسان، جان سالم به در برده است. این ما هستیم که برای بقای خود روی کره زمین، تنها سیاره قابل سکونتی که می‌شناسیم باید تلاش کنیم. یادمان باشد که بقای زمین در گروی بقای ما نیست بلکه بقای ما وابسته به زمین است ...
+                    <br><a href="http://earthsoldier.ir/p/earthday2015/" target="_blank" referrerpolicy="no-referrer">منبع : داریم زمین را از دست می‌دهیم!</a>
+                    </p>
+                    <a href="{{ question.get_absolute_url }}" class="btn btn-outline-dark btn-block btn-lg"> رای دهید </a>
+
+                    <br><hr>
+
+                    <p>
+                        <span class="text-dark">
+                        -    میخواهید <strong>رای </strong> دهید؟
+                        </span><br>
+                        برای رای دادن لازم نیست ثبت نام کنید. هر آی پی میتواند تنها <strong>یک رای </strong> به هر سوال دهد. برای رای دادن میتوانید <strong><a href="{% url 'polls:index' %}">از اینجا</a> </strong> وارد لیست نظرسنجی های موجود شوید و یا مستقیما وارد صفحه هر سوال شوید.
+                    </p>
+                    <p>
+                        <span class="text-dark">
+                        -    میخواهید <strong>فرم نظرسنجی جدید</strong> بسازید؟
+                        </span><br>
+                        برای این کار ابتدا وارد حساب کاربری خود شده سپس از طریق دکمه ابزار نظرسنجی در قسمت بالای صفحه فرم جدید و دلخواه خود را بسازید.
+                    </p>
+                    <p>
+                        <span class="text-dark">
+                        -     میخواهید فرم خود را <strong>ویرایش</strong> کنید؟
+                        </span><br>
+                        ابزار "<strong>مدیریت و ویرایش فرم ها</strong>" در مسیر <strong>ابزار نظرسنجی > مدیریت فرم ها </strong>در دسترس است.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

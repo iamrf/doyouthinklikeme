@@ -12,7 +12,7 @@ Do you think like me? - Home
     <article>
         <header>
             <h3>
-                {{ question.title }}
+                {{ question.title|truncatewords:50 }}
             </h3><br>
         </header>
 
@@ -22,7 +22,7 @@ Do you think like me? - Home
 
         <div class="clearfix"></div>
         <p>
-            {{ question.text|linebreaks|truncatewords:50 }}
+            {{ question.text|linebreaks|truncatewords:150 }}
         </p>
     </article>
     <div class="clearfix"></div>

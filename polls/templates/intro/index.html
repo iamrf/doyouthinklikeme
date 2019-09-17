@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#fff"/>
+        <title>{% block title %}آیا شما هم مثل من فکر میکنید؟{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'intro/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'intro/css/bootstrap.css' %}">
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <![endif]-->
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="{% static 'intro/js/script.js' %}"></script>
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            {% include 'intro/header.html' %}
+        </header>
+
+        <div class="clearfix"></div>
+        
+        <section id="first-section" class="section-fit-page">
+            {% include 'intro/first_section.html' %}
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="guide" class="">
+            {% include 'intro/second_section.html' %}
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="third-section" class="">
+            {% include 'intro/third_section.html' %}
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="contact-section" class="">
+            {% include 'intro/fourth_section.html' %}
+        </section>
+
+        <div class="clearfix"></div>
+
+    </body>
+</html>

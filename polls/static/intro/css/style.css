@@ -1,0 +1,340 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: .5rem;
+}
+
+@viewport{
+    zoom: 1.0;
+    width: device-width;
+}
+    
+@font-face {
+    font-family: 'byekan';
+    src: url('../fonts/YekanWeb-Regular.woff');
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display:block !important;
+    }
+    .mobile-only {
+        display: none !important;
+    }
+    .mobile-only-block {
+        display: none !important;
+    }
+}
+ 
+@media (max-width: 768px) {
+    .desktop-only {
+        display:none !important;
+    }
+    .mobile-only {
+        display:flex !important;
+    }
+    .mobile-only-block {
+        display:block !important;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+}
+
+@media only screen and (orientation: portrait) {
+
+}
+
+*{
+    outline: 0;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    direction: rtl;
+    font-family: 'byekan','ubuntu', Tahoma, 'Segoe UI', Verdana, sans-serif;
+    background-color: rgb(250, 250, 250);
+    transition: .5s;
+    overflow-x: hidden;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .5s;
+    height: 100%;
+    line-height: 2;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.full-view {
+    height: 100vh;  /* it means 100% viewport height */
+    height: 100%;   /* code on JQuery */
+    width : 100%;
+}
+
+/* for js Full cover image */
+.img-full {
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.img-fit {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hand{
+    cursor: pointer !important;
+}
+
+.no-hand{
+    cursor: default !important;
+}
+
+.scroll-header {
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+#top-nav{
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.section-fit-page{
+    height: 100vh;
+}
+
+#first-section{
+    background-image: linear-gradient(90deg, rgba(243, 156, 18,1.0), rgba(211, 84, 0,1.0));
+    /* background: #fff url('../images/bg5.jpg') center center; */
+    background-size: auto;
+}
+
+.bg-gradient{
+    background-image: linear-gradient(90deg, rgba(243, 156, 18,1.0), rgba(211, 84, 0,1.0)) !important;
+}
+
+#first-section .container{
+    padding-top:4rem;
+    color: #f1f1f1;
+    text-align: center;
+}
+
+#first-section h1{
+    padding: 12vh 0 3rem;
+    font-size: 4rem;
+    text-shadow: .3rem 0rem 1rem #000;
+}
+
+.btt{
+    display: block;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: color .5s, padding 1s;
+    min-width: 100%;
+}
+
+.btt-blue{
+    color: #2c3e50;
+    background-image: linear-gradient(90deg, rgba(26, 188, 156,1.0), rgba(41, 128, 185,1.0));
+}
+
+.btt-blue:hover{
+    padding: 2rem;
+    color: #fff;
+    background-image: linear-gradient(45deg, rgba(44, 62, 80,1.0), rgba(52, 73, 94,1.0));
+}
+
+.btt-red{
+    color: #f1f1f1;
+    background-image: linear-gradient(90deg, rgb(160, 39, 26), rgb(233, 48, 28));
+}
+
+.btt-red:hover{
+    padding: 2rem;
+    color: #fff;
+    background-image: linear-gradient(90deg, rgb(102, 44, 38), rgb(170, 25, 9));
+}
+
+.btt-transparent{
+    border: .1rem solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+.btt-transparent:hover{
+    color: #000;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.50);
+    border: none;
+}
+
+#guide{
+    background-image: linear-gradient(90deg, rgb(211, 211, 211), rgb(255, 255, 255));
+    padding: 0 0 6rem;
+}
+
+.sec-title{
+    padding: 7rem 0 5rem;
+    text-align: center;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.card-body h2{
+    padding: 1rem 0;
+}
+
+.card-body p{
+    text-align: justify;
+}
+
+#index-btn{
+    position: absolute;
+    bottom: 1rem;
+    right: 25%;
+    min-width: 50%;
+}
+
+#third-section{
+    background-image: linear-gradient(90deg, rgba(243, 156, 18,1.0), rgba(211, 84, 0,1.0));
+    padding: 0 0 8rem;
+}
+
+.last-forms{
+    padding: 2rem 0;
+}
+
+.progress-text{
+    display: block;
+    padding-top: .5rem;
+}
+
+#contact-section{
+    background-image: linear-gradient(45deg, #2ecc71, #34495e);
+    padding: 4rem;
+}
+
+.fade{
+    opacity: 1;
+    transition: .5s !important;
+}
+
+#contact-form{
+    margin-bottom: 3rem;
+}
+
+.form-element{
+    margin-bottom: .5rem;
+}
+
+.h2-title{
+    padding: 1.5rem;
+    text-shadow: 0rem 0 .5rem #000 !important;
+}
+
+.footer-icon{
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+}
+
+.footer-icon:hover{
+    color: rgb(255, 213, 28);
+}
+
+.signbox{
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    padding: 2rem;
+}

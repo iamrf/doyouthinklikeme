@@ -23,5 +23,6 @@ urlpatterns = [
     path('pvote/<int:id>/', views.pvote, name='pvote'),
     path('nvote/<int:id>/', views.nvote, name='nvote'),
     path('form-<int:id>/', views.q_page, name='q_page'),
-    path('', views.index, name='index'),
+    path('index/', views.index, name='index'),
+    path('', views.intro, name='intro'),
 ]

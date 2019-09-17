@@ -395,3 +395,14 @@ def edit_form(request, id):
     else:
         q.save()
         return HttpResponseRedirect(reverse('polls:q_page', args=[id]))
+
+
+def intro(request):
+    u = request.user
+    q = Question.objects.all()[:6]
+    exmp_q = Question.objects.get(pk=44)
+    return render(request, 'intro/index.html', {
+        'question': exmp_q,
+        'questions': q,
+        'user': u,
+    })

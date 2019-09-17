@@ -1,0 +1,26 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+        </li>
+      </ul>
+      
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane container active" id="home">
+                <form action="{% url 'polls:login' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" class="form-control ltr form-element" id="username" name="username" placeholder="نام کاربری">
+                        <input type="password" class="form-control ltr form-element" id="password" name="password" placeholder="رمز">
+                        <button type="submit" class="btn btn-dark btn-block hand"><i class="fa fa-sign-in fa-rotate-180"></i>&nbsp; ورود</button>
+                    </form>
+        </div>
+        <div class="tab-pane container fade" id="menu1">...</div>
+        <div class="tab-pane container fade" id="menu2">...</div>
+      </div>

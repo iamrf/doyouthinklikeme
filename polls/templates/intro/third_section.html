@@ -1,0 +1,39 @@
+<div class="container">
+    <h2 class="sec-title text-light bg-dark text-center">
+        آخرین فرم های ثبت شده
+    </h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        {% for question in questions %}
+        <div class="col-md-6 col-lg-4 last-forms fade">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <a href="{{ question.get_absolute_url }}" class="text-dark"><h4>{{ question.title|truncatewords:50 }}</h4></a><hr>
+                    <p>
+                        {% include 'polls/progress_full.html' %}
+                    </p>
+                    <p>
+                        {{ question.text|truncatewords:50|linebreaks }}
+                    </p>
+                    <br>
+                    <a href="{{ question.get_absolute_url }}" class="btn btn-block btn-dark btn-lg">
+                        رای دهید
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h3>
+                        هیچ فرمی موجود نیست
+                    </h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
